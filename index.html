@@ -5,43 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Digital Journal</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
   <main>
     <h1>🖤 Our Digital Love Journal</h1>
-    <p>Hi love. This space is where I’ll share daily thoughts, moments, and feelings — just for you.</p>
-
+    <p>
+      I could’ve written this in ink — could’ve folded my heart into pages and handed it to you like a story. But I’m not just the guy who fixes things or builds websites. I’m yours. And this... this is my love written in code, shaped in shadows, and left here like an altar. Each line, each flicker, each word is a quiet confession: I feel everything when it comes to you.
+    </p>
+    <div class="carousel">
+      <div class="carousel-track">
+        <img src="images/Photo1.jpeg" class="carousel-image show" alt="Photo 1">
+        <img src="images/Photo2.jpeg" class="carousel-image" alt="Photo 2">
+        <img src="images/Photo3.jpeg" class="carousel-image" alt="Photo 3">
+        <img src="images/Photo4.jpeg" class="carousel-image" alt="Photo 4">
+        <img src="images/Photo5.jpeg" class="carousel-image" alt="Photo 5">
+        <img src="images/Photo6.jpeg" class="carousel-image" alt="Photo 6">
+        <img src="images/Photo7.jpeg" class="carousel-image" alt="Photo 7">
+        <img src="images/Photo8.jpeg" class="carousel-image" alt="Photo 8">
+        <img src="images/Photo9.jpeg" class="carousel-image" alt="Photo 9">
+      </div>
+    
+      <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+      <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+    </div>
     <section id="entries">
 
-      <div class="entry">
-        <h2 onclick="toggleEntry(this)">📝 July 3, 2025</h2>
+      <article class="entry">
+        <h2 onclick="toggleEntry(this)">🖤 July 3, 2025</h2>
         <div class="entry-body">
-          <p>Today I started building something just for us — this journal. It’s simple now, but I imagine it growing with us. Just like us.</p>
+          <p>
+            I’ve been quiet lately. Not just with you — with myself, with everything. There’s been a weight pressing on my chest that I haven’t been able to put into words. I didn’t mean to shut you out. I wasn’t trying to make you feel unloved or alone. I just… didn’t know how to speak through the fog I’ve been walking through.
+          </p>
+          <p>
+            And then you sent me those flowers. God, they were beautiful. Vibrant, delicate, alive — the opposite of everything I was feeling. They didn’t just brighten the room. They cracked something open in me. I stood there holding them, realizing someone still saw me. Still cared. Still loved me even when I wasn’t saying anything at all.
+          </p>
+          <p>
+            So thank you — for your softness, for your patience, for your love. You reached me without a single word. And I hope this journal reaches you the same way.
+          </p>
         </div>
-      </div>
+      </article>
     
-      <div class="entry">
-        <h2 onclick="toggleEntry(this)">📝 July 4, 2025</h2>
+      <article class="entry">
+        <h2 onclick="toggleEntry(this)">🖤 July 4, 2025</h2>
         <div class="entry-body">
-          <p>Fireworks today made me think of your laugh. Bright, exciting, and impossible to ignore. You are my favorite spark.</p>
+          <p>
+            You were working last night. I know you had to — I didn’t ask for more. But still, I sat in the quiet with fireworks cracking in the distance, and it felt like the whole world was celebrating while I was just… here. Alone. Missing you.
+          </p>
+          <p>
+            I watched the sky light up through the window and thought about how different it would feel with your hand in mine. I’ve never needed big crowds or loud moments — just you. Just your presence. Even your silence is better than the noise this world throws at me.
+          </p>
+          <p>
+            I thought about us. About someday. About laying on a rooftop, maybe, wrapped in a blanket and watching the sparks — not because we care about the fireworks, but because we finally get to be still together.
+          </p>
+          <p>
+            I missed you last night in a way that burned soft and deep. But even in the quiet, I felt you. That’s what love is, I guess. Being alone, and still knowing someone is yours.
+          </p>
         </div>
-      </div>
+      </article>
     
-      <div class="entry">
-        <h2 onclick="toggleEntry(this)">📝 July 5, 2025</h2>
+      <article class="entry">
+        <h2 onclick="toggleEntry(this)">🖤 July 5, 2025</h2>
         <div class="entry-body">
-          <p>This journal lives online now, and it’s for your eyes only. You’re the reason I made this. You’re the reason for a lot of beautiful things in my life.</p>
+          <p>
+            Yesterday, we fought like thunder. Words flew that shouldn’t have, silence followed that cut deeper than either of us meant. You blocked me — and I can’t even blame you for it. But love doesn’t just live in easy moments. It lives in the fire, in the storm, in the ache of missing you even when I’m angry.
+          </p>
+          <p>
+            I couldn’t sit with it. I couldn’t be okay with not trying. So I ran — literally — to your house, heart pounding harder than my feet, just to say one thing: I love you. Not in a perfect, polished way. In a broken, bleeding, human way. I love you enough to show up even when I’m scared. I love you enough to stay.
+          </p>
+          <p>
+            If this journal is anything, let it be proof that I don’t run from you. I run to you. Always.
+          </p>
         </div>
-      </div>
+      </article>
     
     </section>
-    
-    <script>
-      function toggleEntry(header) {
-        const body = header.nextElementSibling;
-        body.classList.toggle('show');
-      }
-    </script>
   </main>
+  <script src="carousel.js"></script>
+<script src="entryToggle.js"></script>
+<script src="fireflies.js"></script>
+
 </body>
 </html>

@@ -1,42 +1,150 @@
-.entry {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+/* GLOBAL RESET */
+body {
+    background-color: #0d0d0d;
+    color: #f2f2f2;
+    font-family: 'Georgia', serif;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
   }
   
-  .entry h2 {
-    margin: 0;
-    padding: 1rem;
-    cursor: pointer;
-    background-color: #fce4ec;
+  /* HEADER */
+  main > h1 {
+    text-align: center;
+    font-size: 3rem;
     color: #8b004d;
-    font-size: 1.3rem;
-    border-radius: 8px 8px 0 0;
-    transition: background-color 0.3s;
+    margin-bottom: 1.5rem;
+  }
+  main > p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #cccccc;
+    margin-bottom: 2rem;
+  }
+  .entry {
+    margin: 2rem 0;
+    border-radius: 14px;
+    background: linear-gradient(to bottom right, #1e0f16, #0d0d0d);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 0 20px rgba(139, 0, 77, 0.15),
+      inset 0 0 8px rgba(255, 255, 255, 0.02);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  
+  .entry:hover {
+    box-shadow:
+      0 0 25px rgba(255, 204, 128, 0.15),
+      0 0 60px rgba(255, 170, 80, 0.08),
+      inset 0 0 10px rgba(255, 100, 0, 0.05);
+    transform: scale(1.01);
+  }
+  
+  .entry-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1rem;
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #f0dede;
+    background-color: #121212;
+  }
+  
+  .entry-body.open {
+    max-height: 300px;
+    padding: 1.2rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8b004d #1a1a1a;
+  }
+  .entry h2 {
+    background: #60123c;
+    color: #f8e4f0;
+    padding: 1rem;
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 1.5rem;
+    margin: 0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-radius: 14px 14px 0 0;
+    transition: background 0.3s ease;
   }
   
   .entry h2:hover {
-    background-color: #f8bbd0;
+    background: #8b004d;
   }
-  
-  /* Smooth dropdown animation */
-.entry-body {
-    max-height: 0;
+  /* CAROUSEL */
+  .carousel {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    margin: 2rem auto;
     overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.3s ease;
-    padding: 0 1rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
   }
   
-  .entry-body.show {
-    max-height: 200px; /* or more if your entries are longer */
-    padding: 1rem;
+  .carousel-image {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    margin: 0 auto;
   }
   
-  /* Center the main page title */
-  main > h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 2.5rem;
+  .carousel-image.show {
+    display: block;
+    opacity: 1;
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: none;
+    font-size: 2rem;
+    color: #f2f2f2;
+    padding: 0.2rem 0.7rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .carousel-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  
+  .carousel-btn.prev {
+    left: 10px;
+  }
+  
+  .carousel-btn.next {
+    right: 10px;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .carousel-btn {
+      font-size: 1.5rem;
+      padding: 0.2rem 0.5rem;
+    }
+  
+    main > h1 {
+      font-size: 2rem;
+    }
+  }
+  .entry:hover {
+    box-shadow:
+      0 0 20px rgba(255, 204, 128, 0.15),
+      0 0 40px rgba(255, 170, 80, 0.1),
+      inset 0 0 10px rgba(255, 100, 0, 0.05);
+    transform: scale(1.01);
   }
