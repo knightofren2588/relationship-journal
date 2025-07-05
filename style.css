@@ -21,14 +21,22 @@
     background-color: #f8bbd0;
   }
   
-  .entry-body {
-    display: none;
-    padding: 1rem;
-    border-top: 1px solid #eee;
-    line-height: 1.6;
-    font-family: 'Georgia', serif;
+  /* Smooth dropdown animation */
+.entry-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    padding: 0 1rem;
   }
   
   .entry-body.show {
-    display: block;
+    max-height: 200px; /* or more if your entries are longer */
+    padding: 1rem;
+  }
+  
+  /* Center the main page title */
+  main > h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
   }
