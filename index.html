@@ -12,11 +12,36 @@
     <p>Hi love. This space is where I’ll share daily thoughts, moments, and feelings — just for you.</p>
 
     <section id="entries">
-      <article>
-        <h2>📝 July 5, 2025</h2>
-        <p>Today I woke up thinking about how grateful I am to have you. Every part of this journey with you has healed me.</p>
-      </article>
+
+      <div class="entry">
+        <h2 onclick="toggleEntry(this)">📝 July 3, 2025</h2>
+        <div class="entry-body">
+          <p>Today I started building something just for us — this journal. It’s simple now, but I imagine it growing with us. Just like us.</p>
+        </div>
+      </div>
+    
+      <div class="entry">
+        <h2 onclick="toggleEntry(this)">📝 July 4, 2025</h2>
+        <div class="entry-body">
+          <p>Fireworks today made me think of your laugh. Bright, exciting, and impossible to ignore. You are my favorite spark.</p>
+        </div>
+      </div>
+    
+      <div class="entry">
+        <h2 onclick="toggleEntry(this)">📝 July 5, 2025</h2>
+        <div class="entry-body">
+          <p>This journal lives online now, and it’s for your eyes only. You’re the reason I made this. You’re the reason for a lot of beautiful things in my life.</p>
+        </div>
+      </div>
+    
     </section>
+    
+    <script>
+      function toggleEntry(header) {
+        const body = header.nextElementSibling;
+        body.classList.toggle('show');
+      }
+    </script>
   </main>
 </body>
 </html>
