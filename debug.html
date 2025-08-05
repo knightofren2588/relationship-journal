@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Digital Journal - DEBUG</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Starfield background -->
+  <div class="stars" id="starfield"></div>
+
+  <main>
+    <h1>🖤 Our Digital Love Journal - DEBUG MODE</h1>
+    <p>
+      I could've written this in ink — could've folded my heart into pages and handed it to you like a story. But I'm not just the guy who fixes things or builds websites. I'm yours. And this... this is my love written in code, shaped in shadows, and left here like an altar. Each line, each flicker, each word is a quiet confession: I feel everything when it comes to you.
+    </p>
+
+    <!-- Love Counter -->
+    <div class="love-stats">
+      <div class="love-counter" id="timeCounter">0 months, 0 days</div>
+      <div class="love-label">Time we've been creating magic together ❤️</div>
+      <div class="anniversary-date">Since October 15th, 2024 💕</div>
+    </div>
+
+    <!-- Reasons I Love You -->
+    <div class="love-reasons">
+      <h3 style="color: #ba55d3; margin-bottom: 1rem;">💜 Reasons I Love You</h3>
+      <button class="reason-button" id="reasonButton">Show me a reason ✨</button>
+      <div class="current-reason" id="currentReason">Click the button to discover why you're amazing</div>
+      <div class="reason-counter" id="reasonCounter">Reasons discovered: 0</div>
+    </div>
+
+    <div class="carousel">
+      <div class="carousel-track">
+        <img src="images/Photo1.jpeg" class="carousel-image show" alt="Photo 1">
+        <img src="images/Photo2.jpeg" class="carousel-image" alt="Photo 2">
+        <img src="images/Photo3.jpeg" class="carousel-image" alt="Photo 3">
+        <img src="images/Photo4.jpeg" class="carousel-image" alt="Photo 4">
+        <img src="images/Photo5.jpeg" class="carousel-image" alt="Photo 5">
+        <img src="images/Photo6.jpeg" class="carousel-image" alt="Photo 6">
+        <img src="images/Photo7.jpeg" class="carousel-image" alt="Photo 7">
+        <img src="images/Photo8.jpeg" class="carousel-image" alt="Photo 8">
+        <img src="images/Photo9.jpeg" class="carousel-image" alt="Photo 9">
+      </div>
+    
+      <button class="carousel-btn prev" id="prevBtn">❮</button>
+      <button class="carousel-btn next" id="nextBtn">❯</button>
+    </div>
+
+    <section id="entries">
+      <article class="entry">
+        <h2 class="entry-header">🖤 July 19, 2025</h2>
+        <div class="entry-body">
+          <p>
+            Last night was one of those nights I'll remember forever. Walking with you, sharing ice cream, laughing at the way it melted faster than we could eat it — it felt like the world was just ours for a little while. I loved our deep talk, the way you opened up and let me see even more of your heart. Every time I look into your eyes, I see so much love shining back at me. It's overwhelming in the best way.
+          </p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <h2 onclick="toggleEntry(this)">🖤 July 17, 2025</h2>
+        <div class="entry-body">
+          <p>
+            Some weeks, life pulls us in different directions. The days slip by, and sometimes it feels like we're living in parallel worlds—close, but not always together. I want you to know that even in the quiet stretches, you mean the world to me.
+          </p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Secret Message Modal -->
+  <div class="secret-message" id="secretMessage">
+    <button class="secret-close" onclick="closeSecret()">×</button>
+    <h2>💕 Secret Message 💕</h2>
+    <p>You found the hidden message! This is proof that even in code, I hide little pieces of my heart for you to discover. You make everything in my world more beautiful, including this website.</p>
+  </div>
+
+  <!-- Debug Console -->
+  <div id="debugConsole" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); color: #00ff00; font-family: monospace; padding: 10px; max-height: 200px; overflow-y: auto; z-index: 10000;">
+    <div style="margin-bottom: 10px;"><strong>DEBUG CONSOLE</strong></div>
+    <div id="debugOutput"></div>
+  </div>
+
+  <script>
+    // Debug logging function
+    function debugLog(message) {
+      console.log(message);
+      const debugOutput = document.getElementById('debugOutput');
+      if (debugOutput) {
+        const timestamp = new Date().toLocaleTimeString();
+        debugOutput.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+        debugOutput.scrollTop = debugOutput.scrollHeight;
+      }
+    }
+
+    // Debug initialization
+    debugLog('Debug mode initialized');
+    
+    // Anniversary date - October 15th, 2024
+    const anniversaryDate = new Date('2024-10-15');
+    debugLog('Anniversary date set: ' + anniversaryDate.toDateString());
+
+    // Calculate months and days together
+    function updateLoveCounter() {
+      debugLog('Updating love counter...');
+      const today = new Date();
+      
+      let years = today.getFullYear() - anniversaryDate.getFullYear();
+      let months = today.getMonth() - anniversaryDate.getMonth();
+      let days = today.getDate() - anniversaryDate.getDate();
+      
+      if (days < 0) {
+        months--;
+        const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += lastMonth.getDate();
+      }
+      
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+      
+      const totalMonths = years * 12 + months;
+      
+      let displayText;
+      if (totalMonths === 0) {
+        displayText = `${days} day${days !== 1 ? 's' : ''}`;
+      } else if (days === 0) {
+        displayText = `${totalMonths} month${totalMonths !== 1 ? 's' : ''}`;
+      } else {
+        displayText = `${totalMonths} month${totalMonths !== 1 ? 's' : ''}, ${days} day${days !== 1 ? 's' : ''}`;
+      }
+      
+      const timeCounter = document.getElementById('timeCounter');
+      if (timeCounter) {
+        timeCounter.textContent = displayText;
+        debugLog('Love counter updated: ' + displayText);
+      } else {
+        debugLog('ERROR: Could not find timeCounter element');
+      }
+    }
+
+    // Initialize everything when DOM is ready
+    document.addEventListener("DOMContentLoaded", function() {
+      debugLog('DOM Content Loaded');
+      
+      // Update love counter
+      updateLoveCounter();
+      
+      // Set up carousel buttons
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          debugLog('Previous button clicked');
+          if (typeof changeSlide === 'function') {
+            changeSlide(-1);
+          } else {
+            debugLog('ERROR: changeSlide function not found');
+          }
+        });
+        debugLog('Previous button event listener added');
+      } else {
+        debugLog('ERROR: Could not find prevBtn element');
+      }
+      
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          debugLog('Next button clicked');
+          if (typeof changeSlide === 'function') {
+            changeSlide(1);
+          } else {
+            debugLog('ERROR: changeSlide function not found');
+          }
+        });
+        debugLog('Next button event listener added');
+      } else {
+        debugLog('ERROR: Could not find nextBtn element');
+      }
+      
+      // Set up entry headers
+      const entryHeaders = document.querySelectorAll('.entry-header');
+      entryHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          debugLog('Entry header clicked');
+          if (typeof toggleEntry === 'function') {
+            toggleEntry(header);
+          } else {
+            debugLog('ERROR: toggleEntry function not found');
+          }
+        });
+      });
+      debugLog(`Entry headers event listeners added: ${entryHeaders.length} found`);
+      
+      // Check if all required functions are available
+      setTimeout(() => {
+        debugLog('Checking function availability...');
+        debugLog('changeSlide available: ' + (typeof changeSlide !== 'undefined'));
+        debugLog('toggleEntry available: ' + (typeof toggleEntry !== 'undefined'));
+        debugLog('showNewReason available: ' + (typeof showNewReason !== 'undefined'));
+        debugLog('closeSecret available: ' + (typeof closeSecret !== 'undefined'));
+      }, 1000);
+    });
+  </script>
+  
+  <script src="fireflies.js"></script>
+  <script src="carousel.js"></script>
+  <script src="entryToggle.js"></script>
+  <script src="loveCounter.js"></script>
+  <script src="interactiveElement.js"></script>
+</body>
+</html> 

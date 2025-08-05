@@ -1,4 +1,9 @@
 function toggleEntry(header) {
     const body = header.nextElementSibling;
-    body.classList.toggle('open');
-  }
+    if (body) {
+        body.classList.toggle('open');
+    }
+}
+
+// Make function globally accessible
+window.toggleEntry = toggleEntry;

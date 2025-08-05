@@ -7,7 +7,9 @@ function showSlide(index) {
   slides.forEach((slide, i) => {
     slide.classList.remove('show');
   });
-  slides[index].classList.add('show');
+  if (slides[index]) {
+    slides[index].classList.add('show');
+  }
 }
 
 // Go to next or previous
@@ -26,24 +28,32 @@ function startAutoPlay() {
 // Swipe support
 function enableSwipe() {
   let startX = 0;
+  const carousel = document.querySelector('.carousel');
+  if (carousel) {
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
 
-  document.querySelector('.carousel').addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
+    carousel.addEventListener('touchend', (e) => {
+      let endX = e.changedTouches[0].clientX;
+      let diff = endX - startX;
 
-  document.querySelector('.carousel').addEventListener('touchend', (e) => {
-    let endX = e.changedTouches[0].clientX;
-    let diff = endX - startX;
-
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        changeSlide(-1); // Swipe right
-      } else {
-        changeSlide(1); // Swipe left
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          changeSlide(-1); // Swipe right
+        } else {
+          changeSlide(1); // Swipe left
+        }
       }
-    }
-  });
+    });
+  }
 }
+
+// Make functions globally accessible
+window.showSlide = showSlide;
+window.changeSlide = changeSlide;
+window.startAutoPlay = startAutoPlay;
+window.enableSwipe = enableSwipe;
 
 document.addEventListener("DOMContentLoaded", () => {
   showSlide(currentSlide);
