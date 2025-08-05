@@ -53,6 +53,27 @@
     <section id="entries">
 
       <article class="entry">
+        <h2 class="entry-header">🖤 July 25, 2025</h2>
+        <div class="entry-body">
+          <p>
+            Okay, so I've been MIA from our digital journal like a character who disappears mid-season and everyone's like "where did they go??" Plot twist: I've been building virtual worlds for work, but the only world that actually matters is the one where you and Kai exist. My coding brain has been running at 110% capacity, but my heart's CPU is always reserved for you two.
+          </p>
+          <p>
+            Fun fact: Did you know that when programmers get tired, they start thinking in code? Well, if I were to write you in JavaScript, you'd be the function that makes everything else work. You're like the main character in my favorite game — the one I never want to put down, the one that makes all the side quests worth it.
+          </p>
+          <p>
+            Watching you with Kai is like watching the best co-op gameplay ever. You two are an unstoppable team, and somehow you let me join your party. Kai's got your sense of humor and your way of making everything an adventure. It's like you created the perfect little sidekick, and now I get to be part of this epic storyline.
+          </p>
+          <p>
+            Here's the thing about building virtual reality: no matter how advanced the graphics get, how immersive the experience becomes, nothing compares to the reality of coming home to you. You're better than any game, any world I could ever code. You're the cheat code that makes life actually fun.
+          </p>
+          <p>
+            So while I'm out here creating digital universes, just know that you and Kai are my favorite reality. You're the reason I keep grinding through these late-night coding sessions — because every line of code I write is another step toward the future we're building together. You're my favorite Easter egg, my secret level, my perfect game. 🎮💕
+          </p>
+        </div>
+      </article>
+
+      <article class="entry">
         <h2 onclick="toggleEntry(this)">🖤 July 3, 2025</h2>
         <div class="entry-body">
           <p>
@@ -163,70 +184,7 @@
     <p>You found the hidden message! This is proof that even in code, I hide little pieces of my heart for you to discover. You make everything in my world more beautiful, including this website.</p>
   </div>
 
-  <script>
-    // All functionality in one place to avoid conflicts
-    
-    // Anniversary date - October 15th, 2024
-    const anniversaryDate = new Date('2024-10-15');
 
-    // Calculate months and days together
-    function updateLoveCounter() {
-      const today = new Date();
-      
-      let years = today.getFullYear() - anniversaryDate.getFullYear();
-      let months = today.getMonth() - anniversaryDate.getMonth();
-      let days = today.getDate() - anniversaryDate.getDate();
-      
-      if (days < 0) {
-        months--;
-        const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-        days += lastMonth.getDate();
-      }
-      
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-      
-      const totalMonths = years * 12 + months;
-      
-      let displayText;
-      if (totalMonths === 0) {
-        displayText = `${days} Day${days !== 1 ? 's' : ''}`;
-      } else if (days === 0) {
-        displayText = `${totalMonths} Month${totalMonths !== 1 ? 's' : ''}`;
-      } else {
-        displayText = `${totalMonths} Month${totalMonths !== 1 ? 's' : ''}, ${days} Day${days !== 1 ? 's' : ''}`;
-      }
-      
-      document.getElementById('timeCounter').textContent = displayText;
-    }
-
-    // Love reasons functionality moved to interactiveElement.js
-
-    // Carousel functionality moved to carousel.js
-
-    // Entry toggle functionality moved to entryToggle.js
-    // Secret message functionality moved to interactiveElement.js
-
-    // Initialize everything when DOM is ready
-    document.addEventListener("DOMContentLoaded", function() {
-      // Update love counter
-      updateLoveCounter();
-      
-      // Set up carousel buttons
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
-      if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
-      
-      // Set up entry headers
-      const entryHeaders = document.querySelectorAll('.entry-header');
-      entryHeaders.forEach(header => {
-        header.addEventListener('click', () => toggleEntry(header));
-      });
-    });
-  </script>
   <script src="fireflies.js"></script>
   <script src="carousel.js"></script>
   <script src="entryToggle.js"></script>

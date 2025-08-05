@@ -30,11 +30,11 @@ function updateLoveCounter() {
     // Update the display
     let displayText;
     if (totalMonths === 0) {
-        displayText = `${days} Day${days !== 1 ? 's' : ''}`;
+        displayText = `${days} day${days !== 1 ? 's' : ''}`;
     } else if (days === 0) {
-        displayText = `${totalMonths} Month${totalMonths !== 1 ? 's' : ''}`;
+        displayText = `${totalMonths} month${totalMonths !== 1 ? 's' : ''}`;
     } else {
-        displayText = `${totalMonths} Month${totalMonths !== 1 ? 's' : ''}, ${days} Day${days !== 1 ? 's' : ''}`;
+        displayText = `${totalMonths} month${totalMonths !== 1 ? 's' : ''}, ${days} day${days !== 1 ? 's' : ''}`;
     }
     
     document.getElementById('timeCounter').textContent = displayText;
