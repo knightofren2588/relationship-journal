@@ -29,6 +29,17 @@
       font-family: 'Georgia', serif;
       font-size: 1rem;
     }
+    select {
+      width: 100%;
+      box-sizing: border-box;
+      background: #121212;
+      color: #f0dede;
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      border-radius: 10px;
+      padding: 0.8rem;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+    }
     textarea { min-height: 260px; line-height: 1.6; }
     small { color: #999; }
     button {
@@ -61,6 +72,12 @@
 <body>
   <h1>🖤 Write to Her</h1>
   <p class="hint">Write as much as you want, as often as you want. She can always read it.</p>
+
+  <label for="entryAuthor">Whose voice?</label>
+  <select id="entryAuthor">
+    <option value="mike">Mine 🖤</option>
+    <option value="alysha">Hers 🤍 — her words, brought here</option>
+  </select>
 
   <label for="entryDate">Date</label>
   <input type="text" id="entryDate" placeholder="July 23, 2026">
@@ -98,6 +115,7 @@ Leave a blank line between paragraphs, just like this."></textarea>
     }
 
     document.getElementById('generateBtn').addEventListener('click', () => {
+      const author = document.getElementById('entryAuthor').value;
       const date = document.getElementById('entryDate').value.trim();
       const text = document.getElementById('entryText').value.trim();
       const photoInput = document.getElementById('entryPhotos').value.trim();
@@ -125,6 +143,7 @@ Leave a blank line between paragraphs, just like this."></textarea>
       const code =
         '  {\n' +
         '    date: "' + escapeForJS(date) + '",\n' +
+        '    author: "' + author + '",\n' +
         '    paragraphs: [\n' + paragraphLines + '\n    ],\n' +
         '    photos: ' + photoLines + '\n' +
         '  },\n';

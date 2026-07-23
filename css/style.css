@@ -619,6 +619,561 @@ main > p {
   background: rgba(255, 105, 180, 0.35);
 }
 
+/* ============================================================
+   HOME PORTRAIT & VIDEO MESSAGES
+   ============================================================ */
+
+/* The centerpiece photo on Home */
+.home-portrait {
+  margin: 2.5rem auto;
+  max-width: 420px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.home-portrait img {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 105, 180, 0.25);
+  box-shadow:
+    0 0 30px rgba(139, 0, 77, 0.4),
+    0 0 70px rgba(186, 85, 211, 0.15);
+  animation: portraitGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes portraitGlow {
+  from { box-shadow: 0 0 30px rgba(139, 0, 77, 0.4), 0 0 70px rgba(186, 85, 211, 0.15); }
+  to   { box-shadow: 0 0 40px rgba(255, 105, 180, 0.45), 0 0 90px rgba(186, 85, 211, 0.25); }
+}
+
+.home-portrait figcaption {
+  margin-top: 0.8rem;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.8rem;
+  color: #ffcccb;
+  text-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+}
+
+/* Video message cards */
+.video-card {
+  background: linear-gradient(to bottom right, #16101e, #0d0d0d);
+  border: 1px solid rgba(200, 200, 255, 0.12);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 25px rgba(120, 100, 200, 0.12);
+}
+
+.video-card h3 {
+  color: #dcd6ff;
+  font-size: 1.4rem;
+  margin: 0 0 0.3rem;
+}
+
+.video-date {
+  color: #ba55d3;
+  font-style: italic;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.video-card video {
+  max-height: 75vh;
+  max-width: 100%;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+  background: #000;
+}
+
+.video-words {
+  margin-top: 1rem;
+  color: #f0dede;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.video-empty-note {
+  text-align: center;
+  color: #b9aee0;
+  font-style: italic;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   WORDS FOR HER, THE CANDLE, HER SONG, FOOTER
+   ============================================================ */
+
+/* Rotating phrases */
+.words-for-her {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.9rem;
+  color: #e6b3ff;
+  min-height: 3rem;
+  margin: 2.5rem 0 1rem;
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+  text-shadow: 0 0 12px rgba(230, 179, 255, 0.35);
+}
+
+/* The candle */
+.candle-area {
+  text-align: center;
+  margin: 2.5rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.candle {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding-top: 60px; /* room for the flame above the wax */
+  outline: none;
+}
+
+.wax {
+  width: 54px;
+  height: 110px;
+  margin: 0 auto;
+  border-radius: 10px 10px 6px 6px;
+  background: linear-gradient(to right, #3a2050, #5c3a80 45%, #2a1740);
+  box-shadow: inset 0 6px 10px rgba(255, 255, 255, 0.08);
+}
+
+.wick {
+  width: 3px;
+  height: 12px;
+  margin: 0 auto -2px;
+  background: #222;
+  border-radius: 2px;
+}
+
+/* The flame — a teardrop of layered gradient, hidden until lit */
+.flame {
+  width: 20px;
+  height: 48px;
+  margin: 0 auto;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 78%,
+    #fffbe6 0%, #ffe9a3 32%, #ffb64d 60%, #ff7a1a 82%, transparent 100%);
+  opacity: 0;
+  transform: scale(0.4);
+  transform-origin: 50% 100%;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  position: relative;
+  top: 10px;
+}
+
+/* Lit: flame appears and starts breathing */
+.candle.lit .flame {
+  opacity: 1;
+  transform: scale(1);
+  animation: flicker 2.4s ease-in-out infinite;
+  box-shadow:
+    0 0 20px rgba(255, 190, 90, 0.7),
+    0 0 60px rgba(255, 150, 50, 0.35),
+    0 0 120px rgba(255, 120, 30, 0.15);
+}
+
+/* The wax catches the glow too */
+.candle.lit .wax {
+  box-shadow:
+    inset 0 6px 10px rgba(255, 255, 255, 0.08),
+    0 -8px 30px rgba(255, 170, 70, 0.25);
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1) rotate(-1.5deg); }
+  25%      { transform: scale(1.06, 0.95) rotate(1deg); }
+  50%      { transform: scale(0.95, 1.05) rotate(-1deg); }
+  75%      { transform: scale(1.04, 0.97) rotate(1.5deg); }
+}
+
+.candle-caption {
+  margin-top: 0.9rem;
+  color: #ffcccb;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+/* Her song */
+.song-player {
+  text-align: center;
+  margin: 1.5rem 0 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.song-toggle {
+  background: linear-gradient(45deg, #4b0082, #8b004d);
+  border: 1px solid rgba(230, 179, 255, 0.3);
+  color: #f0dede;
+  padding: 10px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(75, 0, 130, 0.4);
+}
+
+.song-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 0, 77, 0.5);
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem 0 0.5rem;
+  border-top: 1px solid rgba(255, 105, 180, 0.12);
+  position: relative;
+  z-index: 2;
+}
+
+.site-footer p {
+  margin: 0.3rem 0;
+  color: #b9aee0;
+  font-size: 1rem;
+}
+
+.footer-sub {
+  font-style: italic;
+  font-size: 0.9rem !important;
+  opacity: 0.8;
+}
+
+/* ============================================================
+   THE BUILDER'S PROMISE — the "now" beneath the "then"
+   ============================================================ */
+
+.builders-promise {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #dcd6ff;
+  max-width: 620px;
+  margin: 2rem auto;
+  padding: 1.2rem 1.5rem;
+  border-left: 2px solid rgba(230, 179, 255, 0.4);
+  border-right: 2px solid rgba(230, 179, 255, 0.4);
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 14px rgba(220, 214, 255, 0.25);
+}
+
+/* ============================================================
+   TWO VOICES — journal filters and her entry styling
+   ============================================================ */
+
+.journal-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.journal-filter {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  color: #ffcccb;
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s ease;
+}
+
+.journal-filter:hover {
+  background: rgba(139, 0, 77, 0.35);
+}
+
+.journal-filter.active {
+  background: linear-gradient(45deg, #8b004d, #ba55d3);
+  color: white;
+  box-shadow: 0 2px 10px rgba(186, 85, 211, 0.4);
+}
+
+/* Her entries — the silver-lavender voice */
+.entry.hers {
+  background: linear-gradient(to bottom right, #191430, #0d0d12);
+  border: 1px solid rgba(220, 214, 255, 0.15);
+  box-shadow: 0 0 20px rgba(120, 100, 200, 0.18), inset 0 0 8px rgba(255, 255, 255, 0.02);
+}
+
+.entry.hers h2 {
+  background: #3d2b5e;
+  color: #ece8ff;
+}
+
+.entry.hers h2:hover {
+  background: #55408a;
+}
+
+.entry.hers .entry-body {
+  color: #e8e2f5;
+  background-color: #100e18;
+}
+
+.her-signature {
+  text-align: right;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  color: #dcd6ff;
+  margin-top: 1rem;
+  text-shadow: 0 0 10px rgba(220, 214, 255, 0.35);
+}
+
+.journal-empty-note {
+  text-align: center;
+  color: #b9aee0;
+  font-style: italic;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+  margin: 2.5rem 0;
+}
+
+/* ============================================================
+   JOURNAL AS A BOOK — index rows and page-turn navigation
+   ============================================================ */
+
+.index-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(to bottom right, #1e0f16, #0d0d0d);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  margin: 0.6rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.index-row:hover {
+  transform: translateX(6px);
+  box-shadow: 0 0 18px rgba(255, 105, 180, 0.2);
+}
+
+.index-row.hers {
+  background: linear-gradient(to bottom right, #191430, #0d0d12);
+  border: 1px solid rgba(220, 214, 255, 0.15);
+}
+
+.index-row.hers:hover {
+  box-shadow: 0 0 18px rgba(160, 160, 255, 0.25);
+}
+
+.index-date {
+  font-family: 'UnifrakturCook', cursive;
+  font-size: 1.15rem;
+  color: #f8e4f0;
+  white-space: nowrap;
+}
+
+.index-preview {
+  color: #b9aee0;
+  font-style: italic;
+  font-size: 0.95rem;
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.journal-back {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  color: #ffcccb;
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: 'Georgia', serif;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.journal-back:hover {
+  background: rgba(139, 0, 77, 0.35);
+}
+
+.journal-read-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.journal-read-nav button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  color: #ffcccb;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s ease;
+}
+
+.journal-read-nav button:hover:not(:disabled) {
+  background: rgba(139, 0, 77, 0.35);
+}
+
+.journal-read-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.read-position {
+  color: #ba55d3;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 520px) {
+  .index-preview {
+    display: none;   /* on phones, the date alone is the index line */
+  }
+}
+
+/* ============================================================
+   THE WRITING DESK (Write page)
+   ============================================================ */
+
+.write-box {
+  background: linear-gradient(to bottom right, #1e0f16, #0d0d0d);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(139, 0, 77, 0.15);
+}
+
+.write-box label {
+  display: block;
+  margin: 1rem 0 0.4rem;
+  color: #ffcccb;
+}
+
+.write-box input,
+.write-box textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #121212;
+  color: #f0dede;
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+}
+
+.write-box textarea {
+  min-height: 240px;
+  line-height: 1.6;
+}
+
+.write-box .reason-button {
+  margin-top: 1.2rem;
+}
+
+.write-box .journal-back {
+  margin: 1.2rem 0 0 0.6rem;
+}
+
+.write-whoami {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6rem;
+  color: #e6b3ff;
+  margin: 0 0 0.5rem;
+}
+
+.write-status {
+  margin-top: 0.9rem;
+  color: #b9aee0;
+  font-style: italic;
+  min-height: 1.4rem;
+}
+
+.write-note {
+  text-align: center;
+  color: #b9aee0;
+  font-style: italic;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Search box on the Journal page */
+.journal-search {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  margin: 0 auto 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  border-radius: 20px;
+  color: #f0dede;
+  padding: 0.6rem 1.2rem;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.journal-search::placeholder {
+  color: #8f83b3;
+  font-style: italic;
+}
+
+/* Edit / Delete row under a live entry */
+.entry-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* The photo picker on the writing desk */
+.write-box input[type="file"] {
+  border-style: dashed;
+  cursor: pointer;
+}
+
 /* Mobile responsiveness */
 @media screen and (max-width: 480px) {
   .carousel-btn {

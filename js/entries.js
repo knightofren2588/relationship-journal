@@ -13,6 +13,7 @@
    TEMPLATE:
    {
      date: "July 23, 2026",
+     author: "mike",     // "mike" for your entries, "alysha" for hers
      paragraphs: [
        "First paragraph...",
        "Second paragraph..."
@@ -101,67 +102,280 @@ const journalEntries = [
 ];
 
 /* ============================================================
-   RENDERER — builds the journal from the data above.
-   You shouldn't need to touch anything below this line.
+   RENDERER — the journal as a book.
+   You land on an INDEX (one line per entry); clicking a line
+   opens that entry alone, with Older / Newer page turns.
+   Entries without an "author" count as yours ("mike").
    ============================================================ */
 
-function renderEntries() {
-  const container = document.getElementById('entries');
-  if (!container) return;
+let journalFilter = 'all';
+let journalSearch = '';
+let readingIndex = null;   // null = index view, a number = reading that entry
 
-  container.innerHTML = '';
-
-  journalEntries.forEach(entry => {
-    // The card
-    const article = document.createElement('article');
-    article.className = 'entry';
-
-    // The clickable date header
-    const header = document.createElement('h2');
-    header.textContent = '🖤 ' + entry.date;
-
-    // The collapsible body
-    const body = document.createElement('div');
-    body.className = 'entry-body';
-
-    entry.paragraphs.forEach(text => {
-      const p = document.createElement('p');
-      p.textContent = text;
-      body.appendChild(p);
-    });
-
-    // Attached photos, if any
-    if (entry.photos && entry.photos.length > 0) {
-      const photoWrap = document.createElement('div');
-      photoWrap.className = 'entry-photos';
-      entry.photos.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = 'Memory from ' + entry.date;
-        img.className = 'entry-photo';
-        img.loading = 'lazy';
-        photoWrap.appendChild(img);
-      });
-      body.appendChild(photoWrap);
-    }
-
-    // Open/close on click — we measure the content's real height
-    // (scrollHeight) so long entries are never cut off.
-    header.addEventListener('click', () => {
-      const isOpen = body.classList.contains('open');
-      if (isOpen) {
-        body.style.maxHeight = null;
-        body.classList.remove('open');
-      } else {
-        body.classList.add('open');
-        body.style.maxHeight = (body.scrollHeight + 60) + 'px';
-      }
-    });
-
-    article.appendChild(header);
-    article.appendChild(body);
-    container.appendChild(article);
+function visibleEntries() {
+  return journalEntries.filter(entry => {
+    const author = entry.author || 'mike';
+    const voiceOk = journalFilter === 'all' || author === journalFilter;
+    if (!voiceOk) return false;
+    if (!journalSearch) return true;
+    const haystack = (entry.date + ' ' + entry.paragraphs.join(' ')).toLowerCase();
+    return haystack.includes(journalSearch);
   });
 }
 
-document.addEventListener('DOMContentLoaded', renderEntries);
+function renderJournal() {
+  const container = document.getElementById('entries');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const visible = visibleEntries();
+
+  if (visible.length === 0) {
+    const note = document.createElement('p');
+    note.className = 'journal-empty-note';
+    note.textContent = journalFilter === 'alysha'
+      ? 'Her pages are waiting. 🤍'
+      : 'No entries here yet. 🖤';
+    container.appendChild(note);
+    return;
+  }
+
+  if (readingIndex === null) {
+    renderIndex(container, visible);
+  } else {
+    renderReading(container, visible);
+  }
+}
+
+/* ---------- The index: one line per entry ---------- */
+
+function renderIndex(container, visible) {
+  visible.forEach((entry, i) => {
+    const author = entry.author || 'mike';
+
+    const row = document.createElement('div');
+    row.className = 'index-row' + (author === 'alysha' ? ' hers' : '');
+
+    const date = document.createElement('span');
+    date.className = 'index-date';
+    date.textContent = (author === 'alysha' ? '🤍 ' : '🖤 ') + entry.date;
+
+    // A whisper of the first line, trimmed
+    const preview = document.createElement('span');
+    preview.className = 'index-preview';
+    const firstLine = (entry.paragraphs[0] || '');
+    preview.textContent = firstLine.length > 70
+      ? firstLine.slice(0, 70).trim() + '…'
+      : firstLine;
+
+    row.appendChild(date);
+    row.appendChild(preview);
+
+    row.addEventListener('click', () => {
+      readingIndex = i;
+      renderJournal();
+      window.scrollTo(0, 0);
+    });
+
+    container.appendChild(row);
+  });
+}
+
+/* ---------- The reading view: one entry, like an open page ---------- */
+
+function renderReading(container, visible) {
+  // Stay in bounds if the filter changed underneath us
+  if (readingIndex >= visible.length) readingIndex = visible.length - 1;
+  const entry = visible[readingIndex];
+  const author = entry.author || 'mike';
+
+  // Back to the index
+  const back = document.createElement('button');
+  back.className = 'journal-back';
+  back.textContent = '← All entries';
+  back.addEventListener('click', () => {
+    readingIndex = null;
+    renderJournal();
+  });
+  container.appendChild(back);
+
+  // The entry itself, fully open
+  const article = document.createElement('article');
+  article.className = 'entry' + (author === 'alysha' ? ' hers' : '');
+
+  const header = document.createElement('h2');
+  header.textContent = (author === 'alysha' ? '🤍 ' : '🖤 ') + entry.date;
+
+  const body = document.createElement('div');
+  body.className = 'entry-body open';
+  body.style.maxHeight = 'none';
+
+  entry.paragraphs.forEach(text => {
+    const p = document.createElement('p');
+    p.textContent = text;
+    body.appendChild(p);
+  });
+
+  if (author === 'alysha') {
+    const sig = document.createElement('p');
+    sig.className = 'her-signature';
+    sig.textContent = '— in her words';
+    body.appendChild(sig);
+  }
+
+  if (entry.photos && entry.photos.length > 0) {
+    const photoWrap = document.createElement('div');
+    photoWrap.className = 'entry-photos';
+    entry.photos.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Memory from ' + entry.date;
+      img.className = 'entry-photo';
+      img.loading = 'lazy';
+      photoWrap.appendChild(img);
+    });
+    body.appendChild(photoWrap);
+  }
+
+  article.appendChild(header);
+  article.appendChild(body);
+  container.appendChild(article);
+
+  // Edit / Delete — only for live (posted) entries, and only when
+  // this device has whispered the word
+  const canManage = entry.live && entry.id &&
+    typeof currentVoice === 'function' && currentVoice();
+
+  if (canManage) {
+    const actions = document.createElement('div');
+    actions.className = 'entry-actions';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'journal-back';
+    editBtn.textContent = '✎ Edit';
+    editBtn.addEventListener('click', () => {
+      if (typeof startEditingEntry === 'function') {
+        startEditingEntry(entry);
+        window.location.hash = '#write';
+      }
+    });
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'journal-back';
+    deleteBtn.textContent = '✕ Delete';
+    deleteBtn.addEventListener('click', async () => {
+      const sure = confirm('Delete this entry forever? This cannot be undone.');
+      if (!sure) return;
+      await window.journalDB.from('live_entries').delete().eq('id', entry.id);
+      readingIndex = null;
+      loadLiveEntries();
+    });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+    container.appendChild(actions);
+  }
+
+  // Page turns — the list is newest-first, so "older" is further down
+  const nav = document.createElement('div');
+  nav.className = 'journal-read-nav';
+
+  const newer = document.createElement('button');
+  newer.textContent = '← Newer';
+  newer.disabled = readingIndex === 0;
+  newer.addEventListener('click', () => {
+    readingIndex--;
+    renderJournal();
+    window.scrollTo(0, 0);
+  });
+
+  const position = document.createElement('span');
+  position.className = 'read-position';
+  position.textContent = 'Entry ' + (readingIndex + 1) + ' of ' + visible.length;
+
+  const older = document.createElement('button');
+  older.textContent = 'Older →';
+  older.disabled = readingIndex === visible.length - 1;
+  older.addEventListener('click', () => {
+    readingIndex++;
+    renderJournal();
+    window.scrollTo(0, 0);
+  });
+
+  nav.appendChild(newer);
+  nav.appendChild(position);
+  nav.appendChild(older);
+  container.appendChild(nav);
+}
+
+// Wire up the All / Mine / Hers filter pills
+function setupJournalFilters() {
+  const pills = document.querySelectorAll('.journal-filter');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      journalFilter = pill.dataset.filter;
+      readingIndex = null;   // filters always return you to the index
+      pills.forEach(p => p.classList.toggle('active', p === pill));
+      renderJournal();
+    });
+  });
+}
+
+/* ============================================================
+   LIVE ENTRIES — posts written on the site itself (Supabase).
+   These are fetched and woven in among the entries above,
+   sorted by date. If Supabase isn't configured, this quietly
+   does nothing and the journal works exactly as before.
+   ============================================================ */
+
+async function loadLiveEntries() {
+  if (!window.journalDB) return;
+
+  const { data, error } = await window.journalDB
+    .from('live_entries')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error || !data) return;
+
+  // Remove any live entries from a previous load (avoids doubles)
+  for (let i = journalEntries.length - 1; i >= 0; i--) {
+    if (journalEntries[i].live) journalEntries.splice(i, 1);
+  }
+
+  // Convert database rows into journal entries
+  data.forEach(row => {
+    journalEntries.push({
+      id: row.id,
+      date: row.entry_date,
+      author: row.author,
+      live: true,
+      photos: Array.isArray(row.photos) ? row.photos : [],
+      paragraphs: row.content
+        .split(/\n\s*\n/)
+        .map(p => p.replace(/\s*\n\s*/g, ' ').trim())
+        .filter(p => p.length > 0)
+    });
+  });
+
+  // Newest first, file entries and live entries woven together
+  journalEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  renderJournal();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderJournal();
+  setupJournalFilters();
+  loadLiveEntries();
+
+  // Search-as-you-type
+  const searchBox = document.getElementById('journalSearch');
+  if (searchBox) {
+    searchBox.addEventListener('input', () => {
+      journalSearch = searchBox.value.toLowerCase().trim();
+      readingIndex = null;   // searching returns you to the index
+      renderJournal();
+    });
+  }
+});

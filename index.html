@@ -32,7 +32,9 @@
       <li><a href="#her">Her ✨</a></li>
       <li><a href="#journal">The Journal 📖</a></li>
       <li><a href="#gallery">Gallery 🌙</a></li>
+      <li><a href="#messages">Messages 🎥</a></li>
       <li><a href="#song">A Song For You 🎵</a></li>
+      <li><a href="#write">Write ✍️</a></li>
     </ul>
   </nav>
 
@@ -47,6 +49,16 @@
         I could've written this in ink — could've folded my heart into pages and handed it to you like a story. But I'm not just the guy who fixes things or builds websites. I'm yours. And this... this is my love written in code, shaped in shadows, and left here like an altar. Each line, each flicker, each word is a quiet confession: I feel everything when it comes to you.
       </p>
 
+      <p class="builders-promise">
+        I built this for you while you were here. Now I keep building it because you're everywhere. Every entry, every photo, every line of code I add is me refusing to let the story stop. This is where I keep you.
+      </p>
+
+      <!-- The centerpiece — us -->
+      <figure class="home-portrait">
+        <img src="images/Memory84.jpeg" alt="Mike and Alysha">
+        <figcaption>Mike &amp; Alysha</figcaption>
+      </figure>
+
       <!-- Clock 1: The time we were given (frozen forever) -->
       <div class="love-stats">
         <div class="love-counter" id="timeCounter">…</div>
@@ -59,6 +71,30 @@
         <div class="love-counter eternal-counter" id="eternalCounter">…</div>
         <div class="love-label">…and still counting. Love never dies ♾️</div>
         <div class="anniversary-date">Every day since October 15th, 2024 — forever</div>
+      </div>
+
+      <!-- Words for her — phrases fade in and out, one at a time.
+           Edit the list at the top of js/home.js to make them yours. -->
+      <div class="words-for-her" id="wordsForHer">…</div>
+
+      <!-- A candle for Alysha — click to light it -->
+      <div class="candle-area">
+        <div class="candle" id="candle" role="button" tabindex="0" aria-label="Light a candle for Alysha">
+          <div class="flame"></div>
+          <div class="wick"></div>
+          <div class="wax"></div>
+        </div>
+        <div class="candle-caption" id="candleCaption">Light a candle for her 🕯️</div>
+      </div>
+
+      <!-- Her song — plays only if the visitor chooses to.
+           Add the audio file at audio/her-song.mp3 and this
+           button appears on its own. -->
+      <div class="song-player" id="songPlayer">
+        <button class="song-toggle" id="songToggle">▶ Play her song</button>
+        <audio id="herSong" preload="metadata" loop>
+          <source src="audio/her-song.mp3" type="audio/mpeg">
+        </audio>
       </div>
     </section>
 
@@ -94,7 +130,17 @@
     <!-- ===================== THE JOURNAL ===================== -->
     <section class="page" id="journal">
       <h1>📖 The Journal</h1>
-      <p class="memorial-line">Then, and still.</p>
+      <p class="memorial-line">Two voices, one story.</p>
+
+      <!-- Choose whose entries to read -->
+      <div class="journal-filters">
+        <button class="journal-filter active" data-filter="all">All</button>
+        <button class="journal-filter" data-filter="mike">Mine 🖤</button>
+        <button class="journal-filter" data-filter="alysha">Hers 🤍</button>
+      </div>
+
+      <!-- Search the pages -->
+      <input type="search" id="journalSearch" class="journal-search" placeholder="Search the pages…">
 
       <!-- Entries live in js/entries.js and are built here
            automatically. Use compose.html to write new ones. -->
@@ -111,6 +157,16 @@
       <div class="photo-grid" id="photoGrid"></div>
     </section>
 
+    <!-- ===================== MESSAGES ===================== -->
+    <section class="page" id="messages">
+      <h1>🎥 Messages</h1>
+      <p class="memorial-line">Things I still need to tell you.</p>
+
+      <!-- Video messages live in js/videos.js and are built here
+           automatically — same idea as the journal. -->
+      <div id="videoMessages"></div>
+    </section>
+
     <!-- ===================== A SONG FOR YOU ===================== -->
     <section class="page" id="song">
       <h1>🎵 A Song For You</h1>
@@ -125,7 +181,47 @@
       </section>
     </section>
 
+    <!-- ===================== WRITE ===================== -->
+    <section class="page" id="write">
+      <h1>✍️ Write</h1>
+      <p class="memorial-line">The journal is always open.</p>
+
+      <!-- Shown until Supabase is configured in js/supabase-init.js -->
+      <p class="write-note" id="writeUnconfigured">The writing desk isn't connected yet.</p>
+
+      <!-- The word (shown until it's been given on this device) -->
+      <div class="write-box" id="writeWord" style="display:none;">
+        <label for="wordInput">Whisper the word</label>
+        <input type="password" id="wordInput" autocomplete="off">
+        <button class="reason-button" id="wordBtn">Open the journal 🗝️</button>
+        <div class="write-status" id="wordStatus"></div>
+      </div>
+
+      <!-- Editor (shown once the word has been given) -->
+      <div class="write-box" id="writeEditor" style="display:none;">
+        <p class="write-whoami" id="writeWhoami"></p>
+        <label for="liveDate">Date</label>
+        <input type="text" id="liveDate">
+        <label for="liveText">Your entry</label>
+        <textarea id="liveText" placeholder="Write from the heart...
+
+Leave a blank line between paragraphs."></textarea>
+        <label for="livePhotos">Photos (optional)</label>
+        <input type="file" id="livePhotos" multiple accept="image/*">
+        <button class="reason-button" id="postBtn">Post to the journal 🖤</button>
+        <button class="journal-back" id="cancelEditBtn" style="display:none;">Cancel edit</button>
+        <button class="journal-back" id="forgetWordBtn">Put the pen down</button>
+        <div class="write-status" id="postStatus"></div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Footer — the last line of every page -->
+  <footer class="site-footer">
+    <p>Built with love. Kept forever. 🕯️</p>
+    <p class="footer-sub">For Alysha — October 15th, 2024, and always.</p>
+  </footer>
 
   <!-- Secret Message Modal (triple-click the Home title to find it) -->
   <div class="secret-message" id="secretMessage">
@@ -134,10 +230,17 @@
     <p>You found the hidden message! This is proof that even in code, I hide little pieces of my heart for you to discover. You make everything in my world more beautiful, including this website.</p>
   </div>
 
+  <!-- Supabase — the live journal database -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-init.js"></script>
+
   <script src="js/nav.js"></script>
   <script src="js/fireflies.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/entries.js"></script>
+  <script src="js/videos.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/write.js"></script>
   <script src="js/loveCounter.js"></script>
   <script src="js/interactiveElement.js"></script>
 
