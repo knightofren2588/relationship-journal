@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write to Her — Compose an Entry</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <style>
+    body {
+      background: radial-gradient(ellipse at center, #1a0f1a 0%, #0d0d0d 70%);
+      color: #f2f2f2;
+      font-family: 'Georgia', serif;
+      max-width: 700px;
+      margin: auto;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    h1 { color: #e6b3ff; text-align: center; }
+    .hint { color: #b9aee0; font-style: italic; text-align: center; margin-bottom: 2rem; }
+    label { display: block; margin: 1.2rem 0 0.4rem; color: #ffcccb; }
+    input, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: #121212;
+      color: #f0dede;
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      border-radius: 10px;
+      padding: 0.8rem;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+    }
+    textarea { min-height: 260px; line-height: 1.6; }
+    small { color: #999; }
+    button {
+      background: linear-gradient(45deg, #8b004d, #ba55d3);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    button:hover { transform: translateY(-2px); }
+    #output {
+      display: none;
+      margin-top: 2rem;
+      background: #0a0a0a;
+      border: 1px solid rgba(200, 200, 255, 0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #dcd6ff;
+    }
+    #steps { display: none; margin-top: 1rem; color: #ffcccb; line-height: 1.7; }
+    #copied { color: #90ee90; margin-left: 1rem; visibility: hidden; }
+  </style>
+</head>
+<body>
+  <h1>🖤 Write to Her</h1>
+  <p class="hint">Write as much as you want, as often as you want. She can always read it.</p>
+
+  <label for="entryDate">Date</label>
+  <input type="text" id="entryDate" placeholder="July 23, 2026">
+
+  <label for="entryText">Your entry</label>
+  <textarea id="entryText" placeholder="Write from the heart...
+
+Leave a blank line between paragraphs, just like this."></textarea>
+  <small>A blank line starts a new paragraph.</small>
+
+  <label for="entryPhotos">Photos (optional)</label>
+  <input type="text" id="entryPhotos" placeholder="OurTrip.jpeg, Sunset.jpeg">
+  <small>Drop the photo files into the <b>images/</b> folder first, then list the filenames here, separated by commas.</small>
+
+  <button id="generateBtn">Create my entry code ✨</button>
+  <button id="copyBtn" style="display:none;">Copy to clipboard</button>
+  <span id="copied">Copied 🖤</span>
+
+  <div id="output"></div>
+  <div id="steps">
+    <b>Then:</b><br>
+    1. Open <b>js/entries.js</b> in Cursor.<br>
+    2. Paste this right after the line <b>const journalEntries = [</b><br>
+    3. Save. Your entry appears at the top of the journal.
+  </div>
+
+  <script>
+    // Today's date, pre-filled so you usually don't have to type it
+    document.getElementById('entryDate').value =
+      new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    // Escape quotes/backslashes so the text is safe inside a JS string
+    function escapeForJS(text) {
+      return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      const date = document.getElementById('entryDate').value.trim();
+      const text = document.getElementById('entryText').value.trim();
+      const photoInput = document.getElementById('entryPhotos').value.trim();
+
+      if (!text) { alert('Write something first 🖤'); return; }
+
+      // Blank lines split the writing into paragraphs
+      const paragraphs = text
+        .split(/\n\s*\n/)
+        .map(p => p.replace(/\s*\n\s*/g, ' ').trim())
+        .filter(p => p.length > 0);
+
+      const photos = photoInput
+        ? photoInput.split(',').map(f => 'images/' + f.trim()).filter(f => f !== 'images/')
+        : [];
+
+      const paragraphLines = paragraphs
+        .map(p => '      "' + escapeForJS(p) + '"')
+        .join(',\n');
+
+      const photoLines = photos.length
+        ? '[' + photos.map(f => '"' + escapeForJS(f) + '"').join(', ') + ']'
+        : '[]';
+
+      const code =
+        '  {\n' +
+        '    date: "' + escapeForJS(date) + '",\n' +
+        '    paragraphs: [\n' + paragraphLines + '\n    ],\n' +
+        '    photos: ' + photoLines + '\n' +
+        '  },\n';
+
+      const output = document.getElementById('output');
+      output.textContent = code;
+      output.style.display = 'block';
+      document.getElementById('steps').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('output').textContent).then(() => {
+        const copied = document.getElementById('copied');
+        copied.style.visibility = 'visible';
+        setTimeout(() => copied.style.visibility = 'hidden', 2000);
+      });
+    });
+  </script>
+</body>
+</html>

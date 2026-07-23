@@ -1,0 +1,12 @@
+# Mac system files
+.DS_Store
+
+# The raw video export is too large for git (248MB).
+# The compressed web version lives in videos/tribute.mp4 instead.
+RIP Music Video.mp4
+
+# HEIC originals — the site uses the converted .jpeg versions
+images/*.heic
+
+# Duplicate photos kept for safekeeping, not needed on the site
+images/duplicates/

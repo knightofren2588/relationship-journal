@@ -1,196 +1,185 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Digital Journal</title>
+
+  <!-- Keep this site out of search engines. This is a private place. -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Starfield background -->
   <div class="stars" id="starfield"></div>
 
+  <!-- ===== NAVIGATION =====
+       Each link points at a #hash. js/nav.js watches the hash and
+       shows the matching <section class="page"> below. -->
+  <nav class="site-nav">
+    <a href="#home" class="nav-brand">🖤 Our Journal</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home 🖤</a></li>
+      <li><a href="#her">Her ✨</a></li>
+      <li><a href="#journal">The Journal 📖</a></li>
+      <li><a href="#gallery">Gallery 🌙</a></li>
+      <li><a href="#song">A Song For You 🎵</a></li>
+    </ul>
+  </nav>
+
   <main>
-    <h1>🖤 Our Digital Love Journal</h1>
-    <p>
-      I could've written this in ink — could've folded my heart into pages and handed it to you like a story. But I'm not just the guy who fixes things or builds websites. I'm yours. And this... this is my love written in code, shaped in shadows, and left here like an altar. Each line, each flicker, each word is a quiet confession: I feel everything when it comes to you.
-    </p>
 
-    <!-- Love Counter -->
-    <div class="love-stats">
-      <div class="love-counter" id="timeCounter">0 Months, 0 Days</div>
-      <div class="love-label">Time we've been creating magic together ❤️</div>
-      <div class="anniversary-date">Since October 15th, 2024 💕</div>
-    </div>
+    <!-- ===================== HOME ===================== -->
+    <section class="page" id="home">
+      <h1 id="siteTitle">🖤 Our Digital Love Journal</h1>
+      <p class="memorial-line">In loving memory of Alysha 🕊️</p>
 
-    <!-- Reasons I Love You -->
-    <div class="love-reasons">
-      <h3 style="color: #ba55d3; margin-bottom: 1rem;">💜 Reasons I Love You</h3>
-      <button class="reason-button" id="reasonButton">Show me a reason ✨</button>
-      <div class="current-reason" id="currentReason">Click the button to discover why you're amazing</div>
-      <div class="reason-counter" id="reasonCounter">Reasons discovered: 0</div>
-    </div>
+      <p>
+        I could've written this in ink — could've folded my heart into pages and handed it to you like a story. But I'm not just the guy who fixes things or builds websites. I'm yours. And this... this is my love written in code, shaped in shadows, and left here like an altar. Each line, each flicker, each word is a quiet confession: I feel everything when it comes to you.
+      </p>
 
-    <div class="carousel">
-      <div class="carousel-track">
-        <img src="images/Photo1.jpeg" class="carousel-image show" alt="Photo 1">
-        <img src="images/Photo2.jpeg" class="carousel-image" alt="Photo 2">
-        <img src="images/Photo3.jpeg" class="carousel-image" alt="Photo 3">
-        <img src="images/Photo4.jpeg" class="carousel-image" alt="Photo 4">
-        <img src="images/Photo5.jpeg" class="carousel-image" alt="Photo 5">
-        <img src="images/Photo6.jpeg" class="carousel-image" alt="Photo 6">
-        <img src="images/Photo7.jpeg" class="carousel-image" alt="Photo 7">
-        <img src="images/Photo8.jpeg" class="carousel-image" alt="Photo 8">
-        <img src="images/Photo9.jpeg" class="carousel-image" alt="Photo 9">
+      <!-- Clock 1: The time we were given (frozen forever) -->
+      <div class="love-stats">
+        <div class="love-counter" id="timeCounter">…</div>
+        <div class="love-label">The time we were given together 🖤</div>
+        <div class="anniversary-date">October 15th, 2024 — July 6th, 2026</div>
       </div>
-    
-      <button class="carousel-btn prev" id="prevBtn">❮</button>
-      <button class="carousel-btn next" id="nextBtn">❯</button>
-    </div>
 
-    <section id="entries">
+      <!-- Clock 2: Love never dies (never stops counting) -->
+      <div class="love-stats eternal-stats">
+        <div class="love-counter eternal-counter" id="eternalCounter">…</div>
+        <div class="love-label">…and still counting. Love never dies ♾️</div>
+        <div class="anniversary-date">Every day since October 15th, 2024 — forever</div>
+      </div>
 
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 25, 2025</h2>
-        <div class="entry-body">
-          <p>
-            Okay, so I've been MIA from our digital journal like a character who disappears mid-season and everyone's like "where did they go??" Plot twist: I've been building virtual worlds for work, but the only world that actually matters is the one where you and Kai exist. My coding brain has been running at 110% capacity, but my heart's CPU is always reserved for you two.
-          </p>
-          <p>
-            Fun fact: Did you know that when programmers get tired, they start thinking in code? Well, if I were to write you in JavaScript, you'd be the function that makes everything else work. You're like the main character in my favorite game — the one I never want to put down, the one that makes all the side quests worth it.
-          </p>
-          <p>
-            Watching you with Kai is like watching the best co-op gameplay ever. You two are an unstoppable team, and somehow you let me join your party. Kai's got your sense of humor and your way of making everything an adventure. It's like you created the perfect little sidekick, and now I get to be part of this epic storyline.
-          </p>
-          <p>
-            Here's the thing about building virtual reality: no matter how advanced the graphics get, how immersive the experience becomes, nothing compares to the reality of coming home to you. You're better than any game, any world I could ever code. You're the cheat code that makes life actually fun.
-          </p>
-          <p>
-            So while I'm out here creating digital universes, just know that you and Kai are my favorite reality. You're the reason I keep grinding through these late-night coding sessions — because every line of code I write is another step toward the future we're building together. You're my favorite Easter egg, my secret level, my perfect game. 🎮💕
-          </p>
+      <!-- Featured slideshow — the original carousel lives on Home
+           now; the full photo wall is on the Gallery page -->
+      <div class="carousel">
+        <div class="carousel-track">
+          <img src="images/Photo1.jpeg" class="carousel-image show" alt="Photo 1">
+          <img src="images/Photo2.jpeg" class="carousel-image" alt="Photo 2">
+          <img src="images/Photo3.jpeg" class="carousel-image" alt="Photo 3">
+          <img src="images/Photo4.jpeg" class="carousel-image" alt="Photo 4">
+          <img src="images/Photo5.jpeg" class="carousel-image" alt="Photo 5">
+          <img src="images/Photo6.jpeg" class="carousel-image" alt="Photo 6">
+          <img src="images/Photo7.jpeg" class="carousel-image" alt="Photo 7">
+          <img src="images/Photo8.jpeg" class="carousel-image" alt="Photo 8">
+          <img src="images/Photo9.jpeg" class="carousel-image" alt="Photo 9">
         </div>
-      </article>
 
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 19, 2025</h2>
-        <div class="entry-body">
-          <p>
-            Last night was one of those nights I'll remember forever. Walking with you, sharing ice cream, laughing at the way it melted faster than we could eat it — it felt like the world was just ours for a little while. I loved our deep talk, the way you opened up and let me see even more of your heart. Every time I look into your eyes, I see so much love shining back at me. It's overwhelming in the best way.
-          </p>
-          <p>
-            Telling you about my manic bipolar disorder is one of the hardest things I've ever had to do. Living with it feels like carrying a storm inside me that I can't always control. But you... you accept every part of me without hesitation. You don't see it as something to fix or something to fear. You just love me, all of me, even the parts that feel broken. That means more to me than I can ever put into words.
-          </p>
-          <p>
-            Lying next to you, feeling your warmth, I realize how much peace you bring into my life. There's nowhere I feel safer or more at home than wrapped up with you. Thank you for loving me so deeply, for making even the simplest moments feel magical. I can't wait for a lifetime of nights like this, with you by my side.
-          </p>
-        </div>
-      </article>
-
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 17, 2025</h2>
-        <div class="entry-body">
-          <p>
-            Some weeks, life pulls us in different directions. The days slip by, and sometimes it feels like we're living in parallel worlds—close, but not always together. I want you to know that even in the quiet stretches, you mean the world to me.
-          </p>
-          <p>
-            Even when we don't see each other as much as I wish, or when our conversations are brief, my heart never drifts. Every morning, I wake up and choose you—again and again, no matter the distance or the busyness of our days.
-          </p>
-          <p>
-            You are never too far, and I am never too busy for you. I am always here, loving you in the spaces between our time together, holding you close in my thoughts even when I can't hold you close in my arms.
-          </p>
-          <p>
-            The moments we do share—no matter how small—mean everything to me. I cherish every laugh, every story, every quiet moment by your side. I love discovering your world, sharing in your interests, and seeing the things that light you up like constellations in my sky.
-          </p>
-          <p>
-            Thank you for being my constant, my joy, and my favorite part of every day. Even when the world feels chaotic, you are my peace. I can't wait for all the moments still to come, together.
-          </p>
-        </div>
-      </article>
-
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 14, 2025</h2>
-        <div class="entry-body">
-          <p>
-            Today feels different. Maybe it's because I've been working on this website for you, pouring pieces of my heart into every line of code. Maybe it's because I finally found a way to say what I've been feeling but couldn't quite put into words. Creating this space for us feels like building something sacred — a digital shrine to everything we are and everything we're becoming.
-          </p>
-          <p>
-            I love that you write in our physical journal with ink and paper, and I create these glowing pixels for you. We're documenting our love in two different languages, but they're saying the same thing: you matter to me more than I ever thought possible. Every feature I add to this site, every animation, every small detail — it's all just different ways of saying "I love you."
-          </p>
-          <p>
-            I hope when you see this, you feel how much care went into every pixel. This isn't just a website. This is my love letter to you, written in the only language I know how to speak fluently — code. And somehow, that feels perfect for us.
-          </p>
-        </div>
-      </article>
-
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 5, 2025</h2>
-        <div class="entry-body">
-          <p>
-            Yesterday, we fought like thunder. Words flew that shouldn't have, silence followed that cut deeper than either of us meant. You blocked me — and I can't even blame you for it. But love doesn't just live in easy moments. It lives in the fire, in the storm, in the ache of missing you even when I'm angry.
-          </p>
-          <p>
-            I couldn't sit with it. I couldn't be okay with not trying. So I ran — literally — to your house, heart pounding harder than my feet, just to say one thing: I love you. Not in a perfect, polished way. In a broken, bleeding, human way. I love you enough to show up even when I'm scared. I love you enough to stay.
-          </p>
-          <p>
-            If this journal is anything, let it be proof that I don't run from you. I run to you. Always.
-          </p>
-        </div>
-      </article>
-    
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 4, 2025</h2>
-        <div class="entry-body">
-          <p>
-            You were working last night. I know you had to — I didn't ask for more. But still, I sat in the quiet with fireworks cracking in the distance, and it felt like the whole world was celebrating while I was just… here. Alone. Missing you.
-          </p>
-          <p>
-            I watched the sky light up through the window and thought about how different it would feel with your hand in mine. I've never needed big crowds or loud moments — just you. Just your presence. Even your silence is better than the noise this world throws at me.
-          </p>
-          <p>
-            I thought about us. About someday. About laying on a rooftop, maybe, wrapped in a blanket and watching the sparks — not because we care about the fireworks, but because we finally get to be still together.
-          </p>
-          <p>
-            I missed you last night in a way that burned soft and deep. But even in the quiet, I felt you. That's what love is, I guess. Being alone, and still knowing someone is yours.
-          </p>
-        </div>
-      </article>
-    
-      <article class="entry">
-        <h2 onclick="toggleEntry(this)">🖤 July 3, 2025</h2>
-        <div class="entry-body">
-          <p>
-            I've been quiet lately. Not just with you — with myself, with everything. There's been a weight pressing on my chest that I haven't been able to put into words. I didn't mean to shut you out. I wasn't trying to make you feel unloved or alone. I just… didn't know how to speak through the fog I've been walking through.
-          </p>
-          <p>
-            And then you sent me those flowers. God, they were beautiful. Vibrant, delicate, alive — the opposite of everything I was feeling. They didn't just brighten the room. They cracked something open in me. I stood there holding them, realizing someone still saw me. Still cared. Still loved me even when I wasn't saying anything at all.
-          </p>
-          <p>
-            So thank you — for your softness, for your patience, for your love. You reached me without a single word. And I hope this journal reaches you the same way.
-          </p>
-        </div>
-      </article>
-
-
-    
+        <button class="carousel-btn prev" id="prevBtn" aria-label="Previous photo">❮</button>
+        <button class="carousel-btn next" id="nextBtn" aria-label="Next photo">❯</button>
+      </div>
     </section>
+
+    <!-- ===================== HER ===================== -->
+    <section class="page" id="her">
+      <h1>✨ Her</h1>
+      <p class="memorial-line">Alysha</p>
+
+      <!-- To add her portrait: put the photo in images/ and remove
+           the comment marks around this line, updating the filename.
+      <img src="images/portrait.jpeg" alt="Alysha" class="her-portrait">
+      -->
+
+      <!-- REPLACE the paragraphs below with your own words about her.
+           These are just placeholders to shape the page. -->
+      <p>
+        This page is hers. Write about who she was — the way she laughed, the things she loved, what she taught you, the little details nobody else knew.
+      </p>
+      <p>
+        Her favorite things. Her music. The way she showed up for the people she loved. The things you'll carry with you.
+      </p>
+
+      <!-- Reasons I Love You — lives on her page now,
+           like a little treasure -->
+      <div class="love-reasons">
+        <h3 style="color: #ba55d3; margin-bottom: 1rem;">💜 Reasons I Love You</h3>
+        <button class="reason-button" id="reasonButton">Show me a reason ✨</button>
+        <div class="current-reason" id="currentReason">Click the button to discover why you're amazing</div>
+        <div class="reason-counter" id="reasonCounter">Reasons discovered: 0</div>
+      </div>
+    </section>
+
+    <!-- ===================== THE JOURNAL ===================== -->
+    <section class="page" id="journal">
+      <h1>📖 The Journal</h1>
+      <p class="memorial-line">Then, and still.</p>
+
+      <!-- Entries live in js/entries.js and are built here
+           automatically. Use compose.html to write new ones. -->
+      <section id="entries"></section>
+    </section>
+
+    <!-- ===================== GALLERY ===================== -->
+    <section class="page" id="gallery">
+      <h1>🌙 Gallery</h1>
+      <p class="memorial-line">What we looked like.</p>
+
+      <!-- The photo wall is built by js/gallery.js.
+           Click any photo to view it large. -->
+      <div class="photo-grid" id="photoGrid"></div>
+    </section>
+
+    <!-- ===================== A SONG FOR YOU ===================== -->
+    <section class="page" id="song">
+      <h1>🎵 A Song For You</h1>
+      <p class="memorial-line">Made with everything I have.</p>
+
+      <section class="memorial-video" id="memorialVideoSection">
+        <video id="tributeVideo" controls preload="metadata" playsinline>
+          <source src="videos/tribute.mp4" type="video/mp4">
+          Your browser doesn't support video playback.
+        </video>
+        <p class="video-caption">For you, always.</p>
+      </section>
+    </section>
+
   </main>
 
-  <!-- Secret Message Modal -->
+  <!-- Secret Message Modal (triple-click the Home title to find it) -->
   <div class="secret-message" id="secretMessage">
     <button class="secret-close" onclick="closeSecret()">×</button>
     <h2>💕 Secret Message 💕</h2>
     <p>You found the hidden message! This is proof that even in code, I hide little pieces of my heart for you to discover. You make everything in my world more beautiful, including this website.</p>
   </div>
 
+  <script src="js/nav.js"></script>
+  <script src="js/fireflies.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/entries.js"></script>
+  <script src="js/loveCounter.js"></script>
+  <script src="js/interactiveElement.js"></script>
 
-  <script src="fireflies.js"></script>
-  <script src="carousel.js"></script>
-  <script src="entryToggle.js"></script>
-  <script src="loveCounter.js"></script>
-  <script src="interactiveElement.js"></script>
+  <script>
+    // Hide the video section until the video file actually exists,
+    // so the page never shows a broken player.
+    document.addEventListener('DOMContentLoaded', () => {
+      const section = document.getElementById('memorialVideoSection');
+      const video = document.getElementById('tributeVideo');
+      const source = video ? video.querySelector('source') : null;
+
+      if (section && source) {
+        section.style.display = 'none';
+        video.addEventListener('loadedmetadata', () => {
+          section.style.display = 'block';
+        });
+        source.addEventListener('error', () => {
+          section.style.display = 'none';
+        });
+        video.load();
+      }
+    });
+  </script>
 </body>
 </html>
