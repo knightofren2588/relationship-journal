@@ -10,3 +10,6 @@ images/*.heic
 
 # Duplicate photos kept for safekeeping, not needed on the site
 images/duplicates/
+
+# Retired photo set from the gallery rebuild — kept locally, not deployed
+images/retired/

@@ -8,13 +8,8 @@
 
 const galleryPhotos = [];
 
-// The original nine
-for (let i = 1; i <= 9; i++) {
-  galleryPhotos.push('images/Photo' + i + '.jpeg');
-}
-
 // The memories — raise this number as you add more photos
-const LAST_MEMORY_NUMBER = 54;
+const LAST_MEMORY_NUMBER = 84;
 for (let i = 1; i <= LAST_MEMORY_NUMBER; i++) {
   // padStart turns 1 into "01" so it matches the filenames
   galleryPhotos.push('images/Memory' + String(i).padStart(2, '0') + '.jpeg');
